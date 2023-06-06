@@ -2,7 +2,6 @@
 # Google Capstone Project: Bellabeat case study
 **Author: Hang Vo Thuy Nguyen**
 
-Link to my Bellabeat case study on Kaggle: https://www.kaggle.com/code/nguyenvothuyhang/google-capstone-project-bellabeat-case-study
 ## PHASE 1: Ask
 ### 1. Business task:
 Analyze how people use non-Bellabeat smart devices to improve Bellabeat's marketing strategy.
