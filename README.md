@@ -278,7 +278,7 @@ hourly_steps %>%
 
 ## Bellbeat Data Analysis Dashboard on Tableau
 ### 🎨 [Bellabeat Dashboard](https://public.tableau.com/app/profile/hang.nguyen6427/viz/BellabeatDashboard_16861590988190/Dashboard1)
-## PHASE 6: Share
+## PHASE 6: Act
 |Product| Features | Description and recommendation |
 |---| ---| ---|
 |1. Bellabeat App| Bellabeat App: Provides health data related activity, sleep, stress, menstrual cycle, and mindfulness habits| The average users of Bellabeat app walk more than 7,600 steps per day. We can encourage them to reach the American Heart Association's recommended daily step goal of 10,000. **I recommend sending friendly reminders if they haven't reached that number of steps and by creating posts on app explaining the benefits of reaching that goal**.
