@@ -1,4 +1,3 @@
-
 # Google Capstone Project: Bellabeat case study
 **Author: Hang Vo Thuy Nguyen**
 
@@ -276,6 +275,9 @@ hourly_steps %>%
 ```
 * Most users walk during the day, from 7am to 8pm.
 * The most popular time to walk is in the late afternoon, from 5pm to 7pm.
+
+## Bellbeat Data Analysis Dashboard on Tableau
+### 🎨 [Bellabeat Dashboard](https://public.tableau.com/app/profile/hang.nguyen6427/viz/BellabeatDashboard_16861590988190/Dashboard1)
 ## PHASE 6: Share
 |Product| Features | Description and recommendation |
 |---| ---| ---|
