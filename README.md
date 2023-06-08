@@ -31,6 +31,7 @@ daily_intensities <- read.csv("/kaggle/input/fitbit/Fitabase Data 4.12.16-5.12.1
 daily_steps <- read.csv("/kaggle/input/fitbit/Fitabase Data 4.12.16-5.12.16/dailySteps_merged.csv")
 sleep <- read.csv("/kaggle/input/fitbit/Fitabase Data 4.12.16-5.12.16/sleepDay_merged.csv")
 hourly_intensities <- read.csv("/kaggle/input/fitbit/Fitabase Data 4.12.16-5.12.16/hourlyIntensities_merged.csv")
+hourly_steps <- read.csv("/kaggle/input/fitbit/Fitabase Data 4.12.16-5.12.16/hourlySteps_merged.csv")
 ```
 ### 2.3 Previewing datasets
 ```R
@@ -40,6 +41,7 @@ head(daily_intensities)
 head(daily_steps)
 head(sleep)
 head(hourly_intensities)
+head(hourly_steps)
 ```
 ## PHASE 3: Process
 ### 3.1 Cleaning and formatting
@@ -63,6 +65,11 @@ hourly_intensities$ActivityHour=as.POSIXct(hourly_intensities$ActivityHour, form
 hourly_intensities$time <- format(hourly_intensities$ActivityHour, format = "%H:%M:%S")
 hourly_intensities$date <- format(hourly_intensities$ActivityHour, format = "%m/%d/%y")
 str(hourly_intensities)
+
+hourly_steps$ActivityHour=as.POSIXct(hourly_steps$ActivityHour, format="%m/%d/%Y %I:%M:%S %p", tz=Sys.timezone())
+hourly_steps$time <- format(hourly_steps$ActivityHour, format = "%H:%M:%S")
+hourly_steps$date <- format(hourly_steps$ActivityHour, format = "%m/%d/%y")
+str(hourly_steps)
 ```
 #### 3.1.1 Verifying number of participants
 We want to know how many different people are represented in each data frame. We will keep the sleep dataset for practice even though it has fewer than 30 unique users.
@@ -73,6 +80,7 @@ n_distinct(daily_intensities$Id)
 n_distinct(daily_steps$Id)
 n_distinct(sleep$Id)
 n_distinct(hourly_intensities$Id)
+n_distinct(hourly_steps$Id)
 ```
 #### 3.1.2 Duplicates and remove duplicates
 Looking for any duplicate data.
@@ -83,6 +91,8 @@ sum(duplicated(daily_intensities))
 sum(duplicated(daily_steps))
 sum(duplicated(sleep))
 sum(duplicated(hourly_intensities))
+sum(duplicated(hourly_steps))
+
 ```
 The previous code showed that the sleep dataset has only duplicate records. We will remove these duplicates from the sleep dataset.
 ```R
@@ -163,7 +173,33 @@ ggplot(data = merged_data, aes(x = TotalSteps, y = TotalMinutesAsleep)) +
   theme_classic()
 ```
 There is no correlation between users's daily steps and the amount of minutes asleep per day (Daily Steps and Minutes Asleep).
-### 5.3 Sleep data collection and distribution
+### 5.3  Activity vs. Calories
+```R
+ggplot(data=daily_activity, aes(x=LightlyActiveMinutes, y=Calories)) + 
+  geom_point() + geom_smooth(color = "red") +
+  labs(title="LightlyActiveMinutes vs. Calories") +
+  theme_classic()
+```
+```R
+ggplot(data=daily_activity, aes(x=FairlyActiveMinutes, y=Calories)) + 
+  geom_point() + geom_smooth(color = "red") +
+  labs(title="FairlyActiveMinutes vs. Calories") +
+  theme_classic()
+```
+```R
+ggplot(data=daily_activity, aes(x=VeryActiveMinutes, y=Calories)) + 
+  geom_point() + geom_smooth(color = "red") +
+  labs(title="VeryActiveMinutes vs. Calories") +
+  theme_classic()
+```
+```R
+ggplot(data=daily_activity, aes(x=SedentaryMinutes, y=Calories)) + 
+  geom_point() + geom_smooth(color = "red") +
+  labs(title="SedentaryMinutes vs. Calories") +
+  theme_classic()
+```
+There are many positive correlations between the following relationships: LightlyActiveMinutes vs. Calories, FairlyActiveMinutes vs. Calories, VeryActiveMinutes vs. Calories. However, there is a negative correlation between SedentaryMinutes vs. Calories.
+### 5.4 Sleep data collection and distribution
 ```R
 ggplot(data = sleep_hours) +
   geom_histogram(
@@ -175,7 +211,7 @@ ggplot(data = sleep_hours) +
   theme_light()
 ```
 The visualization shows that most participants sleep for an average of 7 hours. Additionally, many participants sleep between 6 and 9 hours, which is the recommended amount of sleep for adults. This suggests that most participants are getting enough sleep, which is important for good health.
-### 5.4 Typical amount of time spent on apps
+### 5.5 Typical amount of time spent on apps
 ```R
 daily_activity$total_time = rowSums(daily_activity[c("VeryActiveMinutes", "FairlyActiveMinutes", "LightlyActiveMinutes","SedentaryMinutes")])
 
@@ -190,7 +226,7 @@ daily_activity %>%
   theme_light()
 ```
 According to the visualization, users wear devices almost all day, even when they are sleeping.
-### 5.5 Proportion frequency of smart device use 
+### 5.6 Proportion frequency of smart device use 
 ```R
 daily_usage <- daily_activity %>%
   group_by(Id) %>%
@@ -210,7 +246,7 @@ daily_usage %>%
   theme_void() 
   ```
   The pie chart represents that 76% of users wear devices, while only 24% do not.
-  ### 5.6 Average hourly intensity over time
+  ### 5.7 Average hourly intensity over time
   ```R
   hourly_intensities %>%
   group_by(time) %>%
@@ -218,12 +254,28 @@ daily_usage %>%
 
   ggplot(aes(x = time, y = Avg_hourly_int)) +
   geom_histogram(aes(fill= Avg_hourly_int), stat="identity")+ 
+  scale_fill_gradient(low = "yellow", high = "lightgreen") +
   theme_light()+
   theme(axis.text.x = element_text(angle = 90)) +
   labs(title = "Average Total Intensity vs. Time", x= "Time", y="Mean Total Intensity")
 ```
 * Most participants active between 6am and 10pm
-* The peak of activity intensity occurs during the late afternoon, from 5pm to 7pm. At that time period, almost people are finishing work and going to the gym or for a walk. We can use **this time (between 5pm to 7pm) in the Bellabeat app to remind and motivate users to get moving**.
+* The peak of activity intensity occurs during the late afternoon, from 5pm to 7pm. At that time period, almost people are finishing work and going to the gym or for a walk.
+### 5.8 Average hourly steps over time
+```R
+hourly_steps %>%
+ group_by(time) %>%
+ summarise(Avg_hourly_steps = mean(StepTotal)) %>%
+
+ ggplot(aes(x = time, y = Avg_hourly_steps)) +
+ geom_histogram(aes(fill = Avg_hourly_steps), stat = "identity") +
+ scale_fill_gradient(low = "pink", high = "lightblue") +
+ theme_light() +
+ theme(axis.text.x = element_text(angle = 90)) +
+ labs(title = "Average Steps Hourly", x="Activity Hour", y="Mean Total Steps")
+```
+* Most users walk during the day, from 7am to 8pm.
+* The most popular time to walk is in the late afternoon, from 5pm to 7pm.
 ## PHASE 6: Share
 |Product| Features | Description and recommendation |
 |---| ---| ---|
