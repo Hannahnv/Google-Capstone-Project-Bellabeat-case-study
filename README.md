@@ -70,7 +70,7 @@ hourly_steps$time <- format(hourly_steps$ActivityHour, format = "%H:%M:%S")
 hourly_steps$date <- format(hourly_steps$ActivityHour, format = "%m/%d/%y")
 str(hourly_steps)
 ```
-#### 3.1.1 Verifying number of participants
+#### 3.1.1 Verifying the number of participants
 We want to know how many different people are represented in each data frame. We will keep the sleep dataset for practice even though it has fewer than 30 unique users.
 ```R
 n_distinct(daily_activity$Id)
@@ -81,6 +81,19 @@ n_distinct(sleep$Id)
 n_distinct(hourly_intensities$Id)
 n_distinct(hourly_steps$Id)
 ```
+33
+
+33
+
+33
+
+33
+
+24
+
+33
+
+33
 #### 3.1.2 Duplicates and remove duplicates
 Looking for any duplicate data.
 ```R
@@ -91,8 +104,20 @@ sum(duplicated(daily_steps))
 sum(duplicated(sleep))
 sum(duplicated(hourly_intensities))
 sum(duplicated(hourly_steps))
-
 ```
+0
+
+0
+
+0
+
+0
+
+3
+
+0
+
+0
 The previous code showed that the sleep dataset has only duplicate records. We will remove these duplicates from the sleep dataset.
 ```R
 sleep <- sleep %>%
@@ -103,11 +128,15 @@ Verifying output again that duplicates have been removed
 ```R
 sum(duplicated(sleep))
 ```
+0
 ### 3.2 Merging datasets
 ```R
 colnames(daily_activity)
 colnames(sleep)
 ```
+'Id''ActivityDate''TotalSteps''TotalDistance''TrackerDistance''LoggedActivitiesDistance''VeryActiveDistance''ModeratelyActiveDistance''LightActiveDistance''SedentaryActiveDistance''VeryActiveMinutes''FairlyActiveMinutes''LightlyActiveMinutes''SedentaryMinutes''Calories''Ymd'
+
+'Id''SleepDay''TotalSleepRecords''TotalMinutesAsleep''TotalTimeInBed''Ymd'
 ```R
 colnames(daily_activity) <- gsub("\\s", "", colnames(daily_activity))
 colnames(sleep) <- gsub("\\s", "", colnames(sleep))
@@ -136,6 +165,7 @@ daily_activity %>%
   select(VeryActiveMinutes, FairlyActiveMinutes, LightlyActiveMinutes) %>%
   summary()
 ```
+ 
   **There are some interesting findings from the output:**
 * The average person takes 7,638 steps per day, which is a little bit less than the recommended number of 10,000 steps per day by the American Heart Association. The American Heart Association recommends 10,000 steps per day because it is associated with a number of health benefits, including a reduced risk of heart disease, stroke, type 2 diabetes, obesity, and some types of cancer.
 * Average calorie consumption is 2304
