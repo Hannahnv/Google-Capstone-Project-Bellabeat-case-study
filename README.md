@@ -165,7 +165,8 @@ daily_activity %>%
   select(VeryActiveMinutes, FairlyActiveMinutes, LightlyActiveMinutes) %>%
   summary()
 ```
- 
+![image](https://github.com/Hannahnv/Google-Capstone-Project-Bellabeat-case-study/assets/102349995/48eb8794-eb43-49c0-af78-a6a359a5b207)
+
   **There are some interesting findings from the output:**
 * The average person takes 7,638 steps per day, which is a little bit less than the recommended number of 10,000 steps per day by the American Heart Association. The American Heart Association recommends 10,000 steps per day because it is associated with a number of health benefits, including a reduced risk of heart disease, stroke, type 2 diabetes, obesity, and some types of cancer.
 * Average calorie consumption is 2304
@@ -183,6 +184,7 @@ sleep_hours <- sleep %>%
  select(TotalHoursAsleep, TotalHoursInBed)
  summary(sleep_hours)
  ```
+![image](https://github.com/Hannahnv/Google-Capstone-Project-Bellabeat-case-study/assets/102349995/1c3d1ca9-40ff-4c80-b5c2-778429276d19)
  * On average, each participant slept nearly 7 hours, equivalent to 419.2 minutes
 ## PHASE 5: Share
 ### 5.1 Total Steps vs. Calories
@@ -192,6 +194,8 @@ ggplot(data=daily_activity, aes(x=TotalSteps, y=Calories)) +
   labs(title="Total Steps vs. Calories") +
   theme_classic()
 ```
+![image](https://github.com/Hannahnv/Google-Capstone-Project-Bellabeat-case-study/assets/102349995/60f51728-28da-4e97-9da2-0e7312429c09)
+
 There is a positive correlation between the number of steps taken and the number of calories burned (Total Steps vs Calories). This is to be expected, as the more active we are, the more energy our bodies use.
 ### 5.2 Total Steps vs. Minutes Asleep
 ```R
@@ -201,6 +205,8 @@ ggplot(data = merged_data, aes(x = TotalSteps, y = TotalMinutesAsleep)) +
   labs(title = "Total Steps vs. Minutes Asleep", x = "Total Steps", y = "Minutes Asleep") +
   theme_classic()
 ```
+![image](https://github.com/Hannahnv/Google-Capstone-Project-Bellabeat-case-study/assets/102349995/515d7546-c17d-4a96-8210-d3b5a8b2ce10)
+
 There is no correlation between users's daily steps and the amount of minutes asleep per day (Daily Steps and Minutes Asleep).
 ### 5.3  Activity vs. Calories
 ```R
@@ -209,24 +215,30 @@ ggplot(data=daily_activity, aes(x=LightlyActiveMinutes, y=Calories)) +
   labs(title="LightlyActiveMinutes vs. Calories") +
   theme_classic()
 ```
+![image](https://github.com/Hannahnv/Google-Capstone-Project-Bellabeat-case-study/assets/102349995/360bb098-28d0-4aca-b4a4-a8433b91ed06)
+
 ```R
 ggplot(data=daily_activity, aes(x=FairlyActiveMinutes, y=Calories)) + 
   geom_point() + geom_smooth(color = "red") +
   labs(title="FairlyActiveMinutes vs. Calories") +
   theme_classic()
 ```
+![image](https://github.com/Hannahnv/Google-Capstone-Project-Bellabeat-case-study/assets/102349995/5cb0c568-f83e-4f54-a2b4-5da9ed5bac10)
 ```R
 ggplot(data=daily_activity, aes(x=VeryActiveMinutes, y=Calories)) + 
   geom_point() + geom_smooth(color = "red") +
   labs(title="VeryActiveMinutes vs. Calories") +
   theme_classic()
 ```
+![image](https://github.com/Hannahnv/Google-Capstone-Project-Bellabeat-case-study/assets/102349995/bc57fc37-ab67-4e80-97ff-10c16bdfe31b)
 ```R
 ggplot(data=daily_activity, aes(x=SedentaryMinutes, y=Calories)) + 
   geom_point() + geom_smooth(color = "red") +
   labs(title="SedentaryMinutes vs. Calories") +
   theme_classic()
 ```
+![image](https://github.com/Hannahnv/Google-Capstone-Project-Bellabeat-case-study/assets/102349995/3c674563-70be-4232-bb20-2e882aa4d017)
+
 There are many positive correlations between the following relationships: LightlyActiveMinutes vs. Calories, FairlyActiveMinutes vs. Calories, VeryActiveMinutes vs. Calories. However, there is a negative correlation between SedentaryMinutes vs. Calories.
 ### 5.4 Sleep data collection and distribution
 ```R
@@ -239,6 +251,8 @@ ggplot(data = sleep_hours) +
   annotate("text", x=5, y=50, label="7 hours asleep", fontface = "bold", color = "dark blue") +
   theme_light()
 ```
+![image](https://github.com/Hannahnv/Google-Capstone-Project-Bellabeat-case-study/assets/102349995/25964ced-f7f6-42ca-af34-bbd7d7b518a0)
+
 The visualization shows that most participants sleep for an average of 7 hours. Additionally, many participants sleep between 6 and 9 hours, which is the recommended amount of sleep for adults. This suggests that most participants are getting enough sleep, which is important for good health.
 ### 5.5 Typical amount of time spent on apps
 ```R
@@ -254,6 +268,8 @@ daily_activity %>%
   labs(title="Average App Usage Time (Hours)", x = "App Usage Time")+
   theme_light()
 ```
+![image](https://github.com/Hannahnv/Google-Capstone-Project-Bellabeat-case-study/assets/102349995/7348f626-d7e8-4088-88a1-21f9a72c1084)
+
 According to the visualization, users wear devices almost all day, even when they are sleeping.
 ### 5.6 Proportion frequency of smart device use 
 ```R
@@ -274,6 +290,8 @@ daily_usage %>%
   labs(title = "Percentage frequency of daily usage level of device") +
   theme_void() 
   ```
+![image](https://github.com/Hannahnv/Google-Capstone-Project-Bellabeat-case-study/assets/102349995/cdb6af2d-33f8-4ba4-b1d7-3814c5450e8a)
+
   The pie chart represents that 76% of users wear devices, while only 24% do not.
   ### 5.7 Average hourly intensity over time
   ```R
@@ -288,6 +306,7 @@ daily_usage %>%
   theme(axis.text.x = element_text(angle = 90)) +
   labs(title = "Average Total Intensity vs. Time", x= "Time", y="Mean Total Intensity")
 ```
+![image](https://github.com/Hannahnv/Google-Capstone-Project-Bellabeat-case-study/assets/102349995/f6cf160a-a779-4db5-80a8-4a863ce71c83)
 * Most participants active between 6am and 10pm
 * The peak of activity intensity occurs during the late afternoon, from 5pm to 7pm. At that time period, almost people are finishing work and going to the gym or for a walk.
 ### 5.8 Average hourly steps over time
@@ -303,6 +322,8 @@ hourly_steps %>%
  theme(axis.text.x = element_text(angle = 90)) +
  labs(title = "Average Steps Hourly", x="Activity Hour", y="Mean Total Steps")
 ```
+![image](https://github.com/Hannahnv/Google-Capstone-Project-Bellabeat-case-study/assets/102349995/03d9dd09-e4bc-4687-a26d-f4c85539b7b6)
+
 * Most users walk during the day, from 7am to 8pm.
 * The most popular time to walk is in the late afternoon, from 5pm to 7pm.
 
