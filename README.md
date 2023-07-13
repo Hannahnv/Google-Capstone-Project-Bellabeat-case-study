@@ -1,6 +1,15 @@
 # Google Capstone Project: Bellabeat case study
 **Author: Hang Vo Thuy Nguyen**
 
+_The case study follows the six-step data analysis process:_
+### ❓ [Ask](#phase-1-ask)
+### 💻 [Prepare](#phase-2-prepare)
+### 🛠 [Process](#phase-3-process)
+### 📊 [Analyze](#phase-4-analyze)
+### 📋 [Share](#phase-5-share)
+### 🧗‍♀️ [Act](#phase-6-act)
+
+
 ## PHASE 1: Ask
 ### 1. Business task:
 Analyze how people use non-Bellabeat smart devices to improve Bellabeat's marketing strategy.
